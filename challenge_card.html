@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escape Challenge Card</title>
+  <style>
+    :root{
+      --border: 2px solid #111; /* thicker, darker border */
+      --title-size: 28px; /* bigger title */
+    }
+
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #111;
+      margin: 0;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .sheet {
+      width: 55%;
+      padding: 20px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    /* Center logo + title */
+    .header{
+      display: flex;
+      align-items: center;
+      justify-content: center;  /* center instead of space-between */
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+
+    .title{
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 40px;
+    }
+    .meta{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .logo{
+      height:110px;
+      width:auto;
+    }
+
+    /* Bigger input fields */
+    .info-fields{
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0 16px 0;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .info-field{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      min-width: 150px;
+    }
+    .info-field label{
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .info-field input{
+      padding: 10px 12px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+      border: var(--border);
+    }
+    thead th{
+      text-align: center;
+      font-size: 17.5px;
+      padding: 12px 14px;
+      border: var(--border);
+      background: #f6f6f6;
+    }
+    tbody td{
+      padding: 12px 14px;
+      font-size: 17px;
+      border-bottom: 1px dashed #d9d9d9;
+      vertical-align: middle;
+      border: var(--border);
+    }
+    tbody tr:last-child td{ border-bottom: none; }
+
+    .col-activity{ width: 45%; }
+    .col-pts{ width: 12%; text-align: center; }
+    .col-pax{ width: 26%; text-align: center; }
+
+    .pts{ text-align: center; font-variant-numeric: tabular-nums; }
+    .pax-input{
+      width: 100%;
+      max-width: 64px;
+      text-align: center;
+      font-size: 13px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+    }
+
+    tfoot td{ 
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 16px;
+      border: var(--border);
+   }
+    .grand-total-label{ text-align: center; }
+    .grand-total-value{ text-align: center; }
+
+    .submit-btn{
+      margin-top: 20px;
+      padding: 14px 22px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: 1px solid #222;
+      background: #f0f0f0;
+      cursor: pointer;
+      align-self: flex-end;
+      float: right;
+    }
+    .submit-btn:hover{ background: #e4e4e4; }
+
+    .footnote{
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .controls{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0 18px 0;
+      gap: 10px;
+      font-size: 12.5px;
+    }
+    .btn{
+      border: 1px solid #222;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: white;
+      cursor: pointer;
+    }
+    .btn:active{ transform: translateY(1px); }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="header">
+        <img src="logo.jpeg" alt="Logo" class="logo" />
+      <div class="title">ESCAPE CHALLENGE</div>
+    </div>
+
+    <div class="info-fields">
+      <div class="info-field">
+        <label for="teamNo">Team No.</label>
+        <input type="text" id="teamNo" placeholder="Enter team number" />
+      </div>
+      <div class="info-field">
+        <label for="companyName">Company Name</label>
+        <input type="text" id="companyName" placeholder="Enter company name" />
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="col-activity">Activity</th>
+          <th class="col-pts">Pts</th>
+          <th class="col-pax">No. of Pax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-pts="1"><td>Monkey Business - Lvl 1</td><td class="pts">1</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="2"><td>Monkey Business - Lvl 2</td><td class="pts">2</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="3"><td>Monkey Business - Lvl 3</td><td class="pts">3</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="2"><td>Atan’s Leap</td><td class="pts">2</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="1"><td>Gecko Tower - Lvl 1</td><td class="pts">1</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="2"><td>Gecko Tower - Lvl 2</td><td class="pts">2</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="1"><td>Aerobat - Basic Swing</td><td class="pts">1</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="1"><td>Aerobat - Knee Hang</td><td class="pts">1</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+        <tr data-pts="1"><td>Aerobat - Backflip</td><td class="pts">1</td><td class="col-pax"><input class="pax-input" type="number" min="0" max="25" placeholder="0" /></td></tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="grand-total-label">TOTAL POINTS</td>
+          <td class="grand-total-value"><span class="total-value">0</span></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <button class="submit-btn" onclick="submitCard()">Submit</button>
+  </div>
+
+  <script>
+    function calcCardTotal(){
+      let total = 0;
+      document.querySelectorAll('tbody tr').forEach(row => {
+        const pts = Number(row.dataset.pts || 0);
+        const pax = Number(row.querySelector('input')?.value || 0);
+        total += pts * pax;
+      });
+      document.querySelector('.total-value').textContent = total;
+    }
+
+    function bindInputs(){
+      document.querySelectorAll('tbody input').forEach(input => {
+        input.addEventListener('input', () => {
+          if(input.value < 0) input.value = 0;
+          if(input.value > 25) input.value = 25;
+          calcCardTotal();
+        });
+      });
+      calcCardTotal();
+    }
+
+    function resetAll(){
+      document.querySelectorAll('tbody input').forEach(i => i.value = '');
+      calcCardTotal();
+    }
+
+    async function submitCard(){
+      const teamNo = document.getElementById('teamNo').value.trim();
+      const companyName = document.getElementById('companyName').value.trim();
+
+      // ✅ Check required fields
+      if(!teamNo){
+        alert("Please enter a Team No.");
+        document.getElementById('teamNo').focus();
+        return;
+      }
+      if(!companyName){
+        alert("Please enter a Company Name.");
+        document.getElementById('companyName').focus();
+        return;
+      }
+
+      // ✅ Optional: force user to fill ALL pax columns
+      let paxInputs = document.querySelectorAll('tbody input');
+      for(let input of paxInputs){
+        if(input.value.trim() === ""){
+          alert("Please fill in all Pax fields (enter 0 if none).");
+          input.focus();
+          return;
+        }
+      }
+
+      //Calculate total
+      const total = document.querySelector('.total-value').textContent;
+
+      // Build activity data summary
+      let activities = [];
+      document.querySelectorAll('tbody tr').forEach(row => {
+        const name = row.cells[0].textContent;
+        const pax = row.querySelector('input')?.value || 0;
+        activities.push(`${name}: ${pax}`);
+      });
+
+      const payload = {
+        teamNo: teamNo,
+        companyName: companyName,
+        activities: activities.join(", "),
+        total: total
+      };
+
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbxWTGYLAaNwTbpBDclhQUCLFx8rs7Li5QDbYxjhYcD-DY8T44x1g8uLvotNbcPE3zdR/exec", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+
+        if(response.ok){
+          alert("Submitted successfully! ✅");
+          resetAll();
+        } else {
+          alert("Error submitting. ❌");
+        }
+      } catch (err) {
+        alert("Network error. ❌");
+      }
+    }
+    bindInputs();
+  </script>
+</body>
+</html>
